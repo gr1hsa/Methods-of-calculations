@@ -44,7 +44,6 @@ def seidel_method(A: np.array, b: np.array, epsilon: float, w=1):
 
 def generate_matrix(matrix_dimension: int) -> tuple:
     """
-
     Args:
         matrix_dimension (int): _description_
 
