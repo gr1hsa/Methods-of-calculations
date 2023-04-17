@@ -39,8 +39,8 @@ def main():
     b1 = np.array([[200], [-600]])
     b2 = np.array([[199], [-601]])
 
-    print(A)
-    print(b1, '\n', b2)
+    print('A: ', A)
+    print('b1: ', b1, '\n', 'b2: ', b2)
 
     x1 = linalg.solve(A, b1)
     x2 = linalg.solve(A, b2)
@@ -60,14 +60,16 @@ def main():
         print(get_all_cond(H))
         values = []
         for err in reversed(errors):
-            H = hilbert(i)
-            H += (np.random.randint(3, size=[i, i]) - np.ones([i, i], dtype=int)) * err
+            H2 = hilbert(i)
+            #H2 += (np.random.randint(3, size=[i, i]) - np.ones([i, i], dtype=int)) * err
+            H2 += np.ones([i, i], dtype=int) * err
             rand_signs = np.random.randint(3, size=i)
             rand_signs -= np.ones(i, dtype=int)
             b1 = b + err * rand_signs
-            x2 = linalg.solve(H, b1)
+            x2 = linalg.solve(H2, b1)
             print(f"Варьируем на {err}, |x1 - x2| / |x1|: ", linalg.norm(x1 - x2) / linalg.norm(x1))
             values.append(linalg.norm(x1 - x2) / linalg.norm(x1))
+
         result[i - 2] = values
 
     print(tabulate(result, headers=[str(i) for i in range(2, 10)], showindex=reversed(errors)))
