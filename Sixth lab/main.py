@@ -28,7 +28,7 @@ def power_method(A: np.array, epsilon=1e-10):
         x_prev = x_curr
         eigenval_prev = eigenval_curr
 
-    return eigenval_curr, x_curr, steps
+    return eigenval_curr, x_curr / linalg.norm(x_curr), steps
 
 
 def scalar_method(A: np.array, epsilon=1e-10):
@@ -56,7 +56,7 @@ def scalar_method(A: np.array, epsilon=1e-10):
         y_prev = y_curr
         eigenval_prev = eigenval_curr
 
-    return eigenval_curr, x_curr, steps
+    return eigenval_curr, x_curr / linalg.norm(x_curr), steps
 
 
 def main():
@@ -76,7 +76,7 @@ def main():
     print(f"Степенной метод. с.ч.: {pow_eigenval}, с.в.: {pow_eigenvec}, шагов: {pow_steps}")
     print(f"Скалярный метод. с.ч.: {scal_eigenval}, с.в.: {scal_eigenvec}, шагов: {scal_steps}")
     print(f'Библиотечное решение: с.ч.: {max(eigh(A)[0], key=lambda x: abs(x))},'
-          f' с.в.: {eigh(A)[1][np.argmax(np.abs(eigh(A)[0]))]} ')
+          f' с.в.: {eigh(A)[1].T[np.argmax(np.abs(eigh(A)[0]))]} ')
 
     plt.plot([i + 2 for i in range(len(errors))], steps_pow,
              color='red', label='power')
