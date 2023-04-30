@@ -19,6 +19,7 @@ def power_method(A: np.array, epsilon=1e-10):
         steps += 1
         x_curr = A @ x_prev
         eigenval_curr = x_curr[0] / x_prev[0]
+
         if abs(eigenval_curr - eigenval_prev) < epsilon:
             break
 
@@ -82,6 +83,8 @@ def main():
              color='red', label='power')
     plt.plot([i + 2 for i in range(len(errors))], steps_scal,
              color='blue', label='scalar')
+    plt.xlabel('error', fontsize=18)
+    plt.ylabel('steps', fontsize=16)
     plt.legend()
     plt.show()
 

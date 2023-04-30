@@ -12,7 +12,7 @@ def cond_s(A: np.array) -> float:
 def cond_v(A: np.array) -> float:
     ml = 1
     for i in range(len(A)):
-        ml *= np.sqrt(A[i].T @ A[i])
+        ml *= np.sqrt(A[i] @ A[i].T)
 
     return ml / abs(linalg.det(A))
 

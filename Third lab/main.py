@@ -52,6 +52,8 @@ def ritz_method(n: int, a=-1, b=1, k=1):
     polynoms_diff = [jacobi(i + 1, k-1, k-1) for i in range(n)]
     A = np.zeros([n, n])
     vals = np.zeros([n])
+    for pol in polynoms:
+        print(pol(5))
     for i in range(n):
         for j in range(n):
             A[i][j] = integrate.quad(lambda x: p(x) * polynoms_diff[i](x) * polynoms_diff[j](x) *
