@@ -60,47 +60,19 @@ def implicit_schema(num_x: int, num_time: int, x_linspace: list[float], t_linspa
     return u
 
 
-def test_implicit():
-    a = 1e-3
-    mu1 = lambda t: sin(t)
-    mu2 = lambda t: sin(t)
-    mu = lambda x: sin(x)
-
-    num_x = 200
-    num_time = 100
-
-    x_linspace, h = np.linspace(0, 3, num_x, retstep=True)
-    t_linspace, tau = np.linspace(0, 1, num_time, retstep=True)
-
-
-    print(f"(h ** 2) / (2 * a) - tau = {(h ** 2) / (2 * a) - tau}")
-
-    U_implicit = implicit_schema(num_x, num_time, x_linspace, t_linspace, tau, h, a, mu, mu1, mu2, f)
-
-    fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
-
-    X, T = np.meshgrid(x_linspace, t_linspace, indexing='ij')
-    ax.set_ylabel('time')
-    ax.set_xlabel('X')
-    surf = ax.plot_surface(X, T, U_implicit, cmap=cm.coolwarm,
-                           linewidth=0, antialiased=False)
-    fig.colorbar(surf, shrink=0.5, aspect=5)
-
-    plt.show()
-
-
 def test(explicit=True, bad=False):
-    a = 1e-3
+    a = 1
 
     mu1 = lambda t: sin(t)
     mu2 = lambda t: sin(t)
     mu = lambda x: sin(x)
 
-    num_x = 200
+    num_x = 20
     num_time = 100
     if bad:
-        num_x = 2000
-    x_linspace, h = np.linspace(0, 3, num_x, retstep=True)
+        num_x = 50
+
+    x_linspace, h = np.linspace(0, 3.14, num_x, retstep=True)
     t_linspace, tau = np.linspace(0, 1, num_time, retstep=True)
 
     print(f"(h ** 2) / (2 * a) - tau = {(h ** 2) / (2 * a) - tau}")
@@ -115,6 +87,7 @@ def test(explicit=True, bad=False):
     X, T = np.meshgrid(x_linspace, t_linspace, indexing='ij')
     ax.set_ylabel('time')
     ax.set_xlabel('X')
+
     surf = ax.plot_surface(X, T, U, cmap=cm.coolwarm,
                            linewidth=0, antialiased=False)
     fig.colorbar(surf, shrink=0.5, aspect=5)
@@ -125,8 +98,8 @@ def test(explicit=True, bad=False):
 def main():
 
     test()
-    test(bad=True)
     test(explicit=False)
+    test(bad=True)
     test(explicit=False, bad=True)
 
 

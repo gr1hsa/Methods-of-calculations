@@ -2,7 +2,6 @@ import numpy as np
 
 
 def solve_itteration(A: np.array, b: np.array, epsilon: float) -> np.array:
-    #Если будут ошибочки, то нужно будет следить, чтобы на диагонали не было 0
     B = np.zeros_like(A)
     betta = np.zeros_like(b)
     for i in range(len(A)):
